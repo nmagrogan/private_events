@@ -1,0 +1,8 @@
+
+
+<strong>User: </strong><%= @user.email %>
+
+
+<% @user.owned_events.each do |event| %>
+  <%= render 'events/event', event: event  %>
+<% end %>
