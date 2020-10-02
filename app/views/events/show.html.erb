@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<strong>Event owner:</strong>
+<%= @event.owner.email %>
 <%= render 'event', event: @event  %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
