@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_30_235155) do
+ActiveRecord::Schema.define(version: 2020_10_07_225505) do
+
+  create_table "attendences", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_attendences_on_event_id"
+    t.index ["user_id"], name: "index_attendences_on_user_id"
+  end
+
+  create_table "event_attendees", force: :cascade do |t|
+    t.integer "attendee_id"
+    t.integer "attended_event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "description"
@@ -19,6 +35,13 @@ ActiveRecord::Schema.define(version: 2020_09_30_235155) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "owner_id"
+  end
+
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.integer "attended_event_id"
+    t.integer "attendee_id"
+    t.index ["attended_event_id"], name: "index_events_users_on_attended_event_id"
+    t.index ["attendee_id"], name: "index_events_users_on_attendee_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,4 +56,6 @@ ActiveRecord::Schema.define(version: 2020_09_30_235155) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendences", "events"
+  add_foreign_key "attendences", "users"
 end
