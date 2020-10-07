@@ -2,7 +2,16 @@
 
 <strong>User: </strong><%= @user.email %>
 
+<br> <br>
 
+<strong>Owned events</strong>
 <% @user.owned_events.each do |event| %>
   <%= render 'events/event', event: event  %>
+<% end %>
+
+<br><br>
+
+<strong>Attended Events</strong>
+<% @user.attended_events.each do |event| %>
+  <%= render 'events/event', event: event %>
 <% end %>
