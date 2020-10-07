@@ -2,7 +2,15 @@
 
 <strong>Event owner:</strong>
 <%= @event.owner.email %>
+<strong>Event details</strong>
 <%= render 'event', event: @event  %>
+
+<strong>Event Attendees</strong>
+<% @event.attendees.each do |user| %>
+<%= user.email %><br>
+<% end %>
+
+<br>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
